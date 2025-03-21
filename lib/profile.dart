@@ -60,7 +60,7 @@ class ProfileScreen extends StatelessWidget {
                 style: TextStyle(color: Colors.blue),
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 25),
             buildProfileInfoRow('Username', 'JoJoBa'),
             buildProfileInfoRow('Email', 'example00@gmail.com'),
             buildProfileInfoRow('Phone Number', '012-123-***'),
