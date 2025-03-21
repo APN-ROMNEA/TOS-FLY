@@ -61,7 +61,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
 
-        bottomNavigationBar: Container(
+        bottomNavigationBar: SizedBox(
           height: 100,
           child: BottomNavigationBar(
             backgroundColor: Colors.grey[400],

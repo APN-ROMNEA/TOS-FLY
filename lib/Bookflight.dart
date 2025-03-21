@@ -52,7 +52,7 @@ class _BookflightState extends State<Bookflight> {
         ),
 
 
-        bottomNavigationBar: Container(
+        bottomNavigationBar: SizedBox(
           height: 100,
           child: BottomNavigationBar(
             backgroundColor: Colors.grey[400],
