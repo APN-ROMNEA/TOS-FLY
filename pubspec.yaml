@@ -76,6 +76,7 @@ flutter:
   assets:
       - assets/fonts/
       - assets/images/StarterPage.jpg
+      - assets/images/airport.jpg
 
   fonts:
       - family: Akshar  # The name you want to use in your app

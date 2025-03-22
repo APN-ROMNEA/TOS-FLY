@@ -4,7 +4,7 @@ import 'package:final_project/WelcomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/HomePage.dart';
 void main() {
-  runApp(const Mytrip());
+  runApp(const Ticket());
 }
 
 class MyApp extends StatelessWidget {
