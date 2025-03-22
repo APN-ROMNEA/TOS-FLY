@@ -7,9 +7,9 @@ class ProfileDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        title: const Text('Settings'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -18,13 +18,13 @@ class ProfileDetailScreen extends StatelessWidget {
           IconButton(
             icon: Stack(
               children: [
-                Icon(Icons.notifications),
+                const Icon(Icons.notifications),
                 Positioned(
                   right: 0,
                   child: CircleAvatar(
                     radius: 6,
                     backgroundColor: Colors.red,
-                    child: Text(
+                    child: const Text(
                       '1',
                       style: TextStyle(fontSize: 10, color: Colors.white),
                     ),
@@ -42,19 +42,19 @@ class ProfileDetailScreen extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
-                CircleAvatar(
+                const CircleAvatar(
                   radius: 30,
                   child: Icon(Icons.person, size: 40),
                 ),
-                SizedBox(width: 16),
-                Text(
+                const SizedBox(width: 16),
+                const Text(
                   'example00@gmail.com',
                   style: TextStyle(fontSize: 16),
                 ),
               ],
             ),
           ),
-          Divider(),
+          const Divider(),
           Expanded(
             child: ListView(
               children: [
@@ -73,10 +73,10 @@ class ProfileDetailScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Text('version 1.0.0', style: TextStyle(fontSize: 12)),
+                const Text('version 1.0.0', style: TextStyle(fontSize: 12)),
                 GestureDetector(
                   onTap: () {},
-                  child: Text(
+                  child: const Text(
                     'Privacy Policy and User Agreement',
                     style: TextStyle(fontSize: 12, color: Colors.blue),
                   ),
@@ -88,7 +88,7 @@ class ProfileDetailScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 3,
-        items: [
+        items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'HOME'),
           BottomNavigationBarItem(icon: Icon(Icons.flight), label: 'BOOK FLIGHT'),
           BottomNavigationBarItem(icon: Icon(Icons.trip_origin), label: 'MY TRIPS'),
@@ -102,7 +102,7 @@ class ProfileDetailScreen extends StatelessWidget {
     return ListTile(
       leading: Icon(icon),
       title: Text(title),
-      trailing: Icon(Icons.arrow_forward_ios),
+      trailing: const Icon(Icons.arrow_forward_ios),
       onTap: onTap,
     );
   }

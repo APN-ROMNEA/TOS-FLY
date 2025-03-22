@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(MyApp());
@@ -18,14 +20,32 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  ProfileScreenState createState() => ProfileScreenState();
+}
+
+class ProfileScreenState extends State<ProfileScreen> {
+  String? _profileImagePath;
+
+  Future<void> _pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _profileImagePath = pickedFile.path;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('ប្រវត្តិរូប'),
+        title: Text('Settings'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
@@ -39,22 +59,20 @@ class ProfileScreen extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 50,
-              backgroundImage: AssetImage('assets/profile_picture.png'),
+              backgroundImage: _profileImagePath != null
+                  ? FileImage(File(_profileImagePath!))
+                  : AssetImage('assets/profile_picture.png') as ImageProvider,
               child: Align(
                 alignment: Alignment.bottomRight,
                 child: IconButton(
                   icon: Icon(Icons.camera_alt, color: Colors.blue),
-                  onPressed: () {
-                    // Handle change picture action
-                  },
+                  onPressed: _pickImage,
                 ),
               ),
             ),
             SizedBox(height: 8),
             TextButton(
-              onPressed: () {
-                // Handle change picture action
-              },
+              onPressed: _pickImage,
               child: Text(
                 'Change Picture',
                 style: TextStyle(color: Colors.blue),
