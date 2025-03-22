@@ -7,7 +7,13 @@ class ProfileDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('កំណត់'),
+        title: Text('Settings'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         actions: [
           IconButton(
             icon: Stack(
