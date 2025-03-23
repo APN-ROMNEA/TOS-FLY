@@ -52,7 +52,7 @@ class MoreScreen extends StatelessWidget {
               onPressed: () {},
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(double.infinity, 50),
-                primary: Colors.blue,
+                backgroundColor: Colors.blue,
               ),
               child: Text(
                 'LOG IN / REGISTER',
