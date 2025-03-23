@@ -129,7 +129,7 @@ class _MainPageState extends State<MainPage> {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home, size: 40, color: Color.fromARGB(255, 0, 85, 255)),
-              label: 'Home',
+              label: 'HOME',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.flight_takeoff_outlined, size: 40),
