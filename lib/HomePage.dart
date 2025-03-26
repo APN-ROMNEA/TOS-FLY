@@ -160,11 +160,11 @@ class OfferCard extends StatelessWidget {
   final String subtitle;
 
   const OfferCard({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
     required this.subtitle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
