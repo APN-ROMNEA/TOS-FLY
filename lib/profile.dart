@@ -45,46 +45,48 @@ class ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Settings'),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Text(
+          'កំណត់',
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            CircleAvatar(
-              radius: 50,
-              backgroundImage: _profileImagePath != null
-                  ? FileImage(File(_profileImagePath!))
-                  : AssetImage('assets/profile_picture.png') as ImageProvider,
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: IconButton(
-                  icon: Icon(Icons.camera_alt, color: Colors.blue),
-                  onPressed: _pickImage,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              CircleAvatar(
+                radius: 50,
+                backgroundImage: _profileImagePath != null
+                    ? FileImage(File(_profileImagePath!))
+                    : AssetImage('assets/profile_picture.png') as ImageProvider,
+              ),
+              SizedBox(height: 8),
+              TextButton(
+                onPressed: _pickImage,
+                child: Text(
+                  'Change Picture',
+                  style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
                 ),
               ),
-            ),
-            SizedBox(height: 8),
-            TextButton(
-              onPressed: _pickImage,
-              child: Text(
-                'Change Picture',
-                style: TextStyle(color: Colors.blue),
-              ),
-            ),
-            SizedBox(height: 25),
-            buildProfileInfoRow('Username', 'JoJoBa'),
-            buildProfileInfoRow('Email', 'example00@gmail.com'),
-            buildProfileInfoRow('Phone Number', '012-123-***'),
-            buildProfileInfoRow('Joined', '13-Nov-2024'),
-            buildProfileInfoRow('Region', 'Cambodia'),
-          ],
+              SizedBox(height: 25),
+              buildProfileInfoRow('Username', 'JoJoBa'),
+              buildProfileInfoRow('Email', 'example00@gmail.com'),
+              buildProfileInfoRow('Phone Number', '012-123-***'),
+              buildProfileInfoRow('Joined', '13-Nov-2024'),
+              buildProfileInfoRow('Region', 'Cambodia'),
+            ],
+          ),
         ),
       ),
     );
@@ -98,9 +100,12 @@ class ProfileScreenState extends State<ProfileScreen> {
         children: [
           Text(
             label,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black54),
           ),
-          Text(value),
+          Text(
+            value,
+            style: TextStyle(color: Colors.black87),
+          ),
         ],
       ),
     );
