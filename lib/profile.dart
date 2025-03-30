@@ -32,7 +32,8 @@ class ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedFile =
+        await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       setState(() {
@@ -75,14 +76,16 @@ class ProfileScreenState extends State<ProfileScreen> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ProfileDetailScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => ProfileDetailScreen()),
                   );
                 },
                 child: CircleAvatar(
                   radius: 50,
                   backgroundImage: _profileImagePath != null
                       ? FileImage(File(_profileImagePath!))
-                      : AssetImage('assets/profile_picture.png') as ImageProvider,
+                      : AssetImage('assets/profile_picture.png')
+                          as ImageProvider,
                 ),
               ),
               SizedBox(height: 8),
@@ -94,7 +97,8 @@ class ProfileScreenState extends State<ProfileScreen> {
               buildOptionRowWithAction(Icons.lock, 'Change Password', () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ChangePasswordScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => ChangePasswordScreen()),
                 );
               }),
               buildOptionRowWithAction(Icons.language, 'Language', () {
@@ -121,10 +125,12 @@ class ProfileScreenState extends State<ProfileScreen> {
                   MaterialPageRoute(builder: (context) => ContactUsScreen()),
                 );
               }),
-              buildOptionRowWithAction(Icons.description, 'General Conditions of Carriage', () {
+              buildOptionRowWithAction(
+                  Icons.description, 'General Conditions of Carriage', () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => GeneralConditionsScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => GeneralConditionsScreen()),
                 );
               }),
               buildOptionRowWithAction(Icons.settings, 'Preferences', () {
@@ -157,15 +163,18 @@ class ProfileScreenState extends State<ProfileScreen> {
         type: BottomNavigationBarType.fixed,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'HOME'),
-          BottomNavigationBarItem(icon: Icon(Icons.flight), label: 'BOOK FLIGHT'),
-          BottomNavigationBarItem(icon: Icon(Icons.trip_origin), label: 'MY TRIPS'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.flight), label: 'BOOK FLIGHT'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.trip_origin), label: 'MY TRIPS'),
           BottomNavigationBarItem(icon: Icon(Icons.menu), label: 'MORE'),
         ],
       ),
     );
   }
 
-  Widget buildOptionRowWithAction(IconData icon, String title, VoidCallback onTap) {
+  Widget buildOptionRowWithAction(
+      IconData icon, String title, VoidCallback onTap) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
@@ -174,7 +183,8 @@ class ProfileScreenState extends State<ProfileScreen> {
           title,
           style: TextStyle(color: Colors.black87),
         ),
-        trailing: Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black54),
+        trailing:
+            Icon(Icons.arrow_forward_ios, size: 16, color: Colors.black54),
         onTap: onTap,
       ),
     );
@@ -186,7 +196,8 @@ class ProfileScreenState extends State<ProfileScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text('Are you sure to log out?'),
-          content: Text('This will redirect you to the Welcome page. Your session will end.'),
+          content: Text(
+              'This will redirect you to the Welcome page. Your session will end.'),
           actions: [
             TextButton(
               onPressed: () {
@@ -198,7 +209,9 @@ class ProfileScreenState extends State<ProfileScreen> {
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => MyApp()), // Replace with your Welcome page
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          MyApp()), // Replace with your Welcome page
                 );
               },
               child: Text(
@@ -251,7 +264,8 @@ class ProfileDetailScreen extends StatelessWidget {
                 },
                 child: Text(
                   'Change Picture',
-                  style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.blue, fontWeight: FontWeight.bold),
                 ),
               ),
               SizedBox(height: 20),
@@ -275,11 +289,13 @@ class ProfileDetailScreen extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(color: Colors.black54, fontWeight: FontWeight.w500),
+            style:
+                TextStyle(color: Colors.black54, fontWeight: FontWeight.w500),
           ),
           Text(
             value,
-            style: TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
+            style:
+                TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
           ),
         ],
       ),
