@@ -1,3 +1,4 @@
+import 'package:final_project/Sign-in.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatelessWidget {
@@ -5,9 +6,7 @@ class WelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+      return Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFFD9D9D9) ,
           title: Center(
@@ -33,32 +32,47 @@ class WelcomePage extends StatelessWidget {
             ),
           ),
         ),
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.all(60.0),
-          child: SizedBox(
-            width: 200,
-            height: 40,
-            child: FloatingActionButton(
-              onPressed: (){
-              print('You Click ME!');
-              },
-              backgroundColor: Colors.white,
-              foregroundColor: Colors.black,
-              shape: RoundedRectangleBorder( // Makes it rectangular instead of circular
-                borderRadius: BorderRadius.circular(20.0),
+        floatingActionButton: Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 25, bottom: 45),
+            child: SizedBox(
+              width: 250,
+              height: 50,
+              child: FloatingActionButton(
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(
+
+                      builder: (context) => Sign_in()
+
+                  ),);
+                },
+                backgroundColor: Colors.white,
+                foregroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Continue',
+                      style: TextStyle(
+                        letterSpacing: 2.0,
+                        fontFamily: 'Inter',
+                        fontSize: 15.0,
+                      ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Icon(Icons.arrow_forward_outlined)
+                    ],
+                  ),
               ),
-                child: Text('Continue',
-                style: TextStyle(
-                  letterSpacing: 2.0,
-                  fontFamily: 'Inter',
-                  fontSize: 15.0,
-                ),
-                ),
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
 

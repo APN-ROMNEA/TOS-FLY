@@ -1,4 +1,12 @@
+import 'package:final_project/Bookflight.dart';
+import 'package:final_project/More.dart';
+import 'package:final_project/Ticket.dart';
 import 'package:flutter/material.dart';
+import 'package:final_project/HomePage.dart';
+import 'package:final_project/profile.dart';
+import 'package:final_project/Notification.dart';
+
+
 
 
 class Mytrip extends StatefulWidget {
@@ -8,7 +16,6 @@ class Mytrip extends StatefulWidget {
   State<Mytrip> createState() => _MytripState();
 
 }
-
 
 class _MytripState extends State<Mytrip>
     with SingleTickerProviderStateMixin {
@@ -23,48 +30,100 @@ class _MytripState extends State<Mytrip>
     _tabController.dispose();
     super.dispose();
   }
+  final List<Map<String, String>> numofcard = [
+    {
+      "source": "PHNOM PENH",
+      "destination": "JAPAN",
+      "date": "02 February 2025",
+      "airport": "Phnom Penh International Airport",
+      "image": "https://media.connections.be/image/upload/c_fill,g_auto,q_auto:best,w_3840,f_auto//v1652357449/Destinations/Asia/Japan/TOURS/Discover%20Tokyo/Header_Fujiyoshida.jpg"
+    },
+    {
+      "source": "PHNOM PENH",
+      "destination": "BANGKOK",
+      "date": "31 December 2024",
+      "airport": "Phnom Penh International Airport",
+      "image": "https://images.unsplash.com/photo-1508009603885-50cf7c579365?q=80&w=1950&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+      "source": "SIEM REAP",
+      "destination": "ROME",
+      "date": "20 November 2024",
+      "airport": "Siem Reap Airport",
+      "image": "https://images.unsplash.com/photo-1588614959060-4d144f28b207?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fHJvbWV8ZW58MHx8MHx8fDA%3D"
+    }
+  ];
+  int currentpage = 2;
+  void selectedthing(int index) {
+    if (index == currentpage) return;
+
+    switch (index) {
+      case 0:
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MainPage()));
+        break;
+      case 1:
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Bookflight()));
+        break;
+      case 2:
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Mytrip()));
+        break;
+      case 3:
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => MorePage()));
+        break;
+    }
+    }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-          fontFamily: 'Akshar'
-      ),
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: Color(0xFFd9d9d9),
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(90),
-          child: AppBar(
-
-            leading:
-            Padding(
-              padding: const EdgeInsets.only(left: 20.0, top: 25.0),
-              child: Icon(Icons.account_circle,
-                size: 30,),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(50),
+        child: AppBar(
+          backgroundColor: Colors.white,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 25.0, top: 0.0),
+            child: IconButton(
+              icon: const Icon(Icons.account_circle, size: 30),
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => ProfileScreen()));
+              },
             ),
-            title: Center
-              (child:
-            Padding(
-              padding: const EdgeInsets.only(top: 40.0),
-              child: Text('TOS-FLY',
+          ),
+          title: const Padding(
+            padding: EdgeInsets.only(top: 0.0),
+            child: Center(
+              child: Text(
+                'តោះហោះ',
                 style: TextStyle(
                   color: Colors.black87,
-                  fontSize: 20,
-                  fontFamily: 'Akshar',
-
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Moulpali',
                 ),
               ),
             ),
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(top:25.0 ,right: 20.0),
-                child: Icon(Icons.notifications_sharp,
-                  size: 30,),
-              )
-            ],
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(top: 0.0, right: 25.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => NotificationPage()),
+                  );
+                },
+                child: const Icon(Icons.notifications_sharp, size: 30),
+              ),
+            ),
+          ],
         ),
+      ),
 
         body: Column(
           children: [
@@ -72,7 +131,7 @@ class _MytripState extends State<Mytrip>
               margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(16),
                 boxShadow:[ BoxShadow(
                   color: Colors.black26,
                   offset: Offset(0, 3)
@@ -81,7 +140,7 @@ class _MytripState extends State<Mytrip>
 
               ),
               child: Padding(
-                padding: const EdgeInsets.all(2.0),
+                padding: const EdgeInsets.all(0.0),
                 child: TabBar(
                   controller: _tabController,
                   indicator: BoxDecoration(
@@ -106,210 +165,206 @@ class _MytripState extends State<Mytrip>
               ),
             ),
 
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: [
-                  Padding(padding: EdgeInsets.all(2.0),
-                  child: GridView.count(
-                      crossAxisCount: 1,
-                      crossAxisSpacing: 4,
-                      mainAxisSpacing: 2,
-                    children: [
-                      Container(
-                      width: double.infinity,
-                        height: 1000,
-                        color: Colors.black,
+              Expanded(
+                child: TabBarView(
+                  controller: _tabController,
+                  children: [
+                    Padding(padding: EdgeInsets.all(8.0),
+                    child: ListView(
+                      children:[
+                      InkWell(
+                          onTap: (){
+                          print('You Click ME!');
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+
+                          builder: (context) => Ticket()
+
+                          )
+                          );
+                          },
+
+                        child: Card(
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          elevation: 8,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(12),
+                                  topRight: Radius.circular(12),
+
+                                ),
+                                child: Image.network(
+                                  "https://images.unsplash.com/photo-1508009603885-50cf7c579365?q=80&w=1950&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                                  height: 160, // Adjust image height
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+
+                                ),
+                              ),
+
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[400],
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(12),
+                                      bottomRight: Radius.circular(12),
+                                    ),
+                                    border: Border.all(color: Colors.transparent),
+                                  ),
+                                  padding: EdgeInsets.all(12),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Text("PHNOM PENH", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12, letterSpacing: 1, fontFamily: 'Akshar'), ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 8.0,right: 8.0),
+                                            child: Icon(Icons.arrow_forward, size: 18),
+                                          ), // Arrow icon
+                                          Text("BANGKOK", style: TextStyle(fontWeight: FontWeight.bold,fontSize: 12, letterSpacing: 1, fontFamily: 'Akshar')),
+                                        ],
+                                      ),
+                                      SizedBox(height: 4),
+                                      Text(
+                                        "14 February 2025  ·Phnom Penh International Airport",
+                                        style: TextStyle(color: Colors.black, fontSize: 8),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                          ),
+                        ),
+                      ),
+                      ],
+                    ),
+                    ),
+
+                  Center(
+                      child: Padding(padding: EdgeInsets.all(8.0),
+                        child: ListView.builder(
+                          itemCount: numofcard.length,
+                          itemBuilder:(context, index) {
+                            var item = numofcard[index];
+                            return Card(
+                               shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12)),
+                                elevation: 8,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(12),
+                                        topRight: Radius.circular(12),
+
+                                      ),
+                                      child: Image.network(
+                                        item["image"]!,
+                                        height: 160, // Adjust image height
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[400],
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(12),
+                                          bottomRight: Radius.circular(12),
+                                        ),
+                                        border: Border.all(
+                                            color: Colors.transparent),
+                                      ),
+                                      padding: EdgeInsets.all(12),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Text(item["source"]!,
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight
+                                                          .bold,
+                                                      fontSize: 12,
+                                                      letterSpacing: 1,
+                                                      fontFamily: 'Akshar')),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 12.0, right: 12.0),
+                                                child: Icon(Icons.arrow_forward,
+                                                    size: 18),
+                                              ), // Arrow icon
+                                              Text(item["destination"]!, style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 12,
+                                                  letterSpacing: 1,
+                                                  fontFamily: 'Akshar')),
+                                            ],
+                                          ),
+                                          SizedBox(height: 4),
+                                          Text(
+                                              "${item["date"]} · ${item["airport"]}",
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 8),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                          }
+                        ),
 
                       ),
-                      Container(
-                        width: 100,
-                        height: 50,
-                        color: Colors.black,
-                      ),
-                      Container(
-                        width: 100,
-                        height: 50,
-                        color: Colors.black,
-                      ),
-                    ],
+
+
                   ),
-                  ),
-                  Center(child: Text("Past Trips", style: TextStyle(fontSize: 12))),
                 ],
               ),
             ),
           ],
         ),
-
-        bottomNavigationBar: Container(
+        bottomNavigationBar: SizedBox(
           height: 100,
           child: BottomNavigationBar(
             backgroundColor: Colors.grey[400],
             type: BottomNavigationBarType.fixed,
+            currentIndex: currentpage,
+            onTap: selectedthing,
               items: <BottomNavigationBarItem>[
               const BottomNavigationBarItem(
-                backgroundColor: Colors.blueAccent,
                 icon: Icon(Icons.home, size: 40 , color: Colors.black,), label: 'Home',),
               const BottomNavigationBarItem(
                   icon: Icon(Icons.flight_takeoff_outlined, size: 40,), label: 'BOOK FLIGHT'),
               const BottomNavigationBarItem(
-                  icon: Icon(Icons.luggage, size: 40,), label: 'MY TRIPS'),
+                  icon: Icon(Icons.luggage, size: 40, color: Colors.blue,), label: 'MY TRIPS'),
               const BottomNavigationBarItem(
-                  icon: Icon(Icons.more_horiz_sharp, size: 40,), label: 'MORE'),
+                  icon: Icon(Icons.more_horiz_sharp, size: 40,),   label: 'MORE'),
             ],
-            selectedItemColor: Colors.black,
+            selectedItemColor: Colors.blue,
             unselectedItemColor: Colors.black,
             selectedLabelStyle: TextStyle(fontSize: 13),
             unselectedLabelStyle: TextStyle(fontSize: 10),
 
           ),
         ),
-      ),
-    );
+      );
   }
 }
 
-class Ticket extends StatelessWidget {
-  const Ticket({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Color(0xFFd9d9d9),
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(90),
-          child: AppBar(
-
-            leading:
-            Padding(
-              padding: const EdgeInsets.only(left: 10.0, top: 25.0),
-              child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back_ios_new))
-            ),
-            title: Center
-              (child:
-            Padding(
-              padding: const EdgeInsets.only(top: 40.0, right: 60),
-              child: Text('TOS-FLY',
-                style: TextStyle(
-                  color: Colors.black87,
-                  fontSize: 20,
-                  fontFamily: 'Akshar',
-                ),
-              ),
-            ),
-            ),
-          ),
-        ),
-        body: Column(
-          children: [
-            Stack(
-              children: [
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.black,
-                boxShadow: [BoxShadow(
-                  blurRadius: 10,
-                )]
-              ),
-              child: Image.asset("assets/images/airport.jpg",
-                fit: BoxFit.cover,
-                width: MediaQuery.of(context).size.width,
-              ),
-            ),
-                Positioned(
-                  top: 20,
-                  left: 10,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white54,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(Icons.calendar_month_rounded, size: 16,),
-                        SizedBox(width: 5),
-                        Text('Today', style: TextStyle(fontFamily: "Inter",fontSize: 15),)
-                      ],
-                    ),
-                )
-                )
-        ],
-    ),
-
-            Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8.0, left: 8.0),
-                  child: Text('14 Feb 2025',
-                    style: TextStyle(
-                    fontWeight: FontWeight.bold
-                    )
-                  ),
-                )
-            ),
-            Container(
-              width: double.infinity,
-              height: 150,
-              margin: EdgeInsets.all(8),
-              padding: EdgeInsets.all(16),
-              decoration: BoxDecoration(
-              color: Colors.blue[100],
-             ),
-              child:  Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CircleAvatar(
-                        backgroundColor:  Color(0xFF014E81),
-                        child: Icon(Icons.airplanemode_on_outlined,color: Colors.white,),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text("PNH", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                      Text("Phnom Penh", style: TextStyle(fontSize: 14)),
-                      Text("Bangkok Airways - BA810", style: TextStyle(fontSize: 10, color:  Color(0xFF014E81),fontWeight: FontWeight.bold)),
-                    ],
 
 
-                  ),
-                  RotatedBox(quarterTurns: 1,child: Icon(Icons.airplanemode_active, size: 30)),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                        decoration: BoxDecoration(
-                          color: Color(0xFF014E81),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text('CHECK IN', style: TextStyle(fontFamily: "Inter",fontSize: 15, color: Colors.white),)
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text("BKK", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-                      Text("Bangkok", style: TextStyle(fontSize: 14)),
-                    ],
-
-
-                  )
-                ],
-              ),
-            ),
-          ],
-
-        ),
-      ),
-    );
-  }
-}
 
 
 
