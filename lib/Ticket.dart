@@ -26,11 +26,13 @@ class Ticket extends StatelessWidget {
               (child:
             Padding(
               padding: const EdgeInsets.only(top: 40.0, right: 60),
-              child: Text('TOS-FLY',
+              child: Text(
+                'តោះហោះ',
                 style: TextStyle(
                   color: Colors.black87,
-                  fontSize: 20,
-                  fontFamily: 'Akshar',
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Moulpali',
                 ),
               ),
             ),
@@ -73,7 +75,6 @@ class Ticket extends StatelessWidget {
                 )
               ],
             ),
-
             Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
@@ -110,8 +111,6 @@ class Ticket extends StatelessWidget {
                       Text("Phnom Penh", style: TextStyle(fontSize: 14)),
                       Text("Bangkok Airways - BA810", style: TextStyle(fontSize: 10, color:  Color(0xFF014E81),fontWeight: FontWeight.bold)),
                     ],
-
-
                   ),
                   RotatedBox(quarterTurns: 1,child: Icon(Icons.airplanemode_active, size: 30)),
                   Column(
@@ -137,8 +136,44 @@ class Ticket extends StatelessWidget {
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0,right: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text("DEPARTURE", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold,color: Color(0xFF014E81))),
+                      SizedBox(height: 4),
+                      Text("6:00", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold,color: Color(0xFF014E81))),
+                      Text("Scheduled 14 Feb - 6:00AM", style: TextStyle(fontSize: 12, color: Color(0xFF014E81))),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: const [
+                      Text("ARRIVAL", style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Color(0xFF014E81))),
+                      SizedBox(height: 4),
+                      Text("1:30", style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.orangeAccent)),
+                      Text("Scheduled 14 Feb - 15:30PM", style: TextStyle(fontSize: 12, color: Color(0xFF014E81))),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 16),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0,right: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text("Phnom Penh International\nAirport", style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Color(0xFF014E81))),
+                  Text("          Suvarnabhumi\nInternational Airport", style: TextStyle(fontSize: 12 , fontWeight: FontWeight.bold, color: Color(0xFF014E81))),
+                ],
+              ),
+            ),
           ],
-
         ),
       );
   }

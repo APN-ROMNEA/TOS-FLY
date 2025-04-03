@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:final_project/utilities/users_service.dart';
 import 'package:final_project/Sign-up.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 final TextEditingController emailController = TextEditingController();
 final TextEditingController passwordController = TextEditingController();
@@ -363,6 +365,8 @@ void handleLogin(
     var user = await UsersService.instance.checkEmail(email);
     if (user != null) {
       if (user['password'] == password) {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('userId', user['id']);
         setErrorMessage(null);
         Navigator.pushReplacement(
           context,

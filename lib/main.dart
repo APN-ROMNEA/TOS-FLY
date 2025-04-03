@@ -1,11 +1,14 @@
 import 'package:final_project/Bookflight.dart';
 import 'package:final_project/HomePage.dart';
+import 'package:final_project/Ticket.dart';
+import 'package:final_project/changepw.dart';
 import 'package:final_project/tripsum.dart';
 import 'package:final_project/Sign-in.dart';
 import 'package:final_project/Sign-up.dart';
 import 'package:final_project/WelcomePage.dart';
 import 'package:final_project/contact.dart';
 import 'package:final_project/profile.dart';
+import 'package:final_project/More.dart';
 import 'package:flutter/material.dart';
 
 void main() {

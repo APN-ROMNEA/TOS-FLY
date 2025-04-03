@@ -1,8 +1,15 @@
 import 'package:final_project/Bookflight.dart';
+import 'package:final_project/changepw.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/HomePage.dart';
+import 'package:final_project/WelcomePage.dart';
 import 'package:final_project/Mytrip.dart';
 import 'package:final_project/profile.dart';
+import 'package:final_project/Notification.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:final_project/utilities/users_service.dart';
+
+
 
 
 class MorePage extends StatefulWidget {
@@ -14,6 +21,22 @@ class MorePage extends StatefulWidget {
 
 class _MorePageState extends State<MorePage> {
   int currentpage = 3;
+  late Future<dynamic> _userFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _userFuture = _loadUser();
+  }
+  Future<dynamic> _loadUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userId = prefs.getString('userId');
+    if (userId == null) {
+      throw Exception("No user is logged in");
+    }
+    return await UsersService.instance.getUserById(userId);
+  }
+
   void selectedthing(int index) {
     if (index == currentpage) return;
 
@@ -41,10 +64,9 @@ class _MorePageState extends State<MorePage> {
       return Scaffold(
         backgroundColor: Color(0xFFd9d9d9),
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(90),
+          preferredSize: const Size.fromHeight(50),
           child: AppBar(
-            backgroundColor: Colors.grey[400],
-
+            backgroundColor: Colors.white,
             leading: Padding(
               padding: const EdgeInsets.only(left: 25.0, top: 0.0),
               child: IconButton(
@@ -71,10 +93,17 @@ class _MorePageState extends State<MorePage> {
             ),
             actions: [
               Padding(
-                padding: const EdgeInsets.only(top:25.0 ,right: 20.0),
-                child: Icon(Icons.notifications_sharp,
-                  size: 30,),
-              )
+                padding: const EdgeInsets.only(top: 0.0, right: 25.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => NotificationPage()),
+                    );
+                  },
+                  child: const Icon(Icons.notifications_sharp, size: 30),
+                ),
+              ),
             ],
           ),
         ),
@@ -89,9 +118,22 @@ class _MorePageState extends State<MorePage> {
                     child: Icon(Icons.person, size: 40),
                   ),
                   const SizedBox(width: 16),
-                  const Text(
-                    'example00@gmail.com',
-                    style: TextStyle(fontSize: 16),
+                  FutureBuilder<dynamic>(
+                    future: _userFuture,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      }
+                      if (snapshot.hasError) {
+                        return const Text('Error loading user data');
+                      }
+                      if (snapshot.hasData) {
+                        var user = snapshot.data;
+                        String email = user is Map<String, dynamic> ? user['email'] ?? 'No email available' : 'No email available';
+                        return Text(email, style: const TextStyle(fontSize: 16));
+                      }
+                      return const Text('No email available');
+                    },
                   ),
                 ],
               ),
@@ -100,14 +142,45 @@ class _MorePageState extends State<MorePage> {
             Expanded(
               child: ListView(
                 children: [
-                  _buildListTile(Icons.lock, 'Change Password', () {}),
+                  _buildListTile(Icons.lock, 'Change Password', () {Navigator.push(context, MaterialPageRoute(builder: (context) => changepw()),);}),
                   _buildListTile(Icons.language, 'Language', () {}),
                   _buildListTile(Icons.help, 'FAQ', () {}),
                   _buildListTile(Icons.feedback, 'Feedback', () {}),
                   _buildListTile(Icons.contact_mail, 'Contact Us', () {}),
                   _buildListTile(Icons.description, 'General Conditions of Carriage', () {}),
                   _buildListTile(Icons.settings, 'Preferences', () {}),
-                  _buildListTile(Icons.logout, 'Log Out', () {}),
+                  _buildListTile(Icons.logout, 'Log Out', () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          backgroundColor: Colors.grey,
+                          title: Text("Confirm Logout"),
+                          content: Text("Are you sure you want to log out?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("Cancel"),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                SharedPreferences prefs = await SharedPreferences.getInstance();
+                                await prefs.clear();
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(builder: (context) => WelcomePage()),
+                                      (Route<dynamic> route) => false,
+                                );
+                              },
+                              child: Text("Logout", style: TextStyle(color: Colors.red)),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }),
+
                 ],
               ),
             ),
@@ -148,7 +221,7 @@ class _MorePageState extends State<MorePage> {
               const BottomNavigationBarItem(
                   icon: Icon(Icons.more_horiz_sharp, size: 40, color:Colors.blue),   label: 'MORE'),
             ],
-            selectedItemColor: Colors.black,
+            selectedItemColor: Colors.blue,
             unselectedItemColor: Colors.black,
             selectedLabelStyle: TextStyle(fontSize: 13),
             unselectedLabelStyle: TextStyle(fontSize: 10),

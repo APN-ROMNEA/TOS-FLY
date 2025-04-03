@@ -18,10 +18,8 @@ class _PassengerInfoScreenState extends State<PassengerInfoScreen> {
             Navigator.pop(context);
           },
         ),
-        title: Text(
-          "Passengers Info",
-          style: TextStyle(color: Colors.black),
-        ),
+        title: const Text('តោះហោះ', style: TextStyle(fontSize: 20, fontFamily: 'Moulpali', fontWeight: FontWeight.bold) ),
+
         centerTitle: true,
         elevation: 0,
       ),

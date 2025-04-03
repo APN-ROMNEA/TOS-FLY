@@ -16,7 +16,7 @@ class _TripSummaryPageState extends State<TripSummaryPage> {
     return Scaffold(
       backgroundColor: Colors.blue, // Set the background color here
       appBar: AppBar(
-        title: const Text('តោះហោះ', style: TextStyle(fontSize: 20, fontFamily: 'Moulpali') ),
+        title: const Text('តោះហោះ', style: TextStyle(fontSize: 20, fontFamily: 'Moulpali', fontWeight: FontWeight.bold) ),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),

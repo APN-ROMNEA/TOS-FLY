@@ -155,7 +155,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   print("Error message: $errorMessage");
 
                                   if (message == "success") {
-                                    // Clear controllers
                                     emailController.clear();
                                     passwordController.clear();
                                     usernameController.clear();
@@ -422,7 +421,7 @@ void handleRegister(
     String password,
     String username,
     String phone_number,
-    Function(String?) setErrorMessage, // Callback for setting error message
+    Function(String?) setErrorMessage,
     ) async {
   setErrorMessage(null);
 

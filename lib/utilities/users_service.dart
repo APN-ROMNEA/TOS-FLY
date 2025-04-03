@@ -65,6 +65,38 @@
         throw "Unable to retrieve contacts";
       }
     }
+    Future<Map<String, dynamic>?> updateUserProfile(String id, Map<String, dynamic> data) async {
+      try {
+        Response res = await patch(
+          Uri.parse('$baseurl/$id'),
+          body: jsonEncode(data),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        );
+
+        if (res.statusCode == 200) {
+          return jsonDecode(res.body);
+        } else {
+          throw "Unable to update user data. Error: ${res.statusCode}";
+        }
+      } catch (e) {
+        throw "Error: $e";
+      }
+    }
+    Future<dynamic> getUserById(String id) async {
+      try {
+        final response = await get(Uri.parse('$baseurl/$id'));
+
+        if (response.statusCode == 200) {
+          return jsonDecode(response.body);
+        } else {
+          throw Exception("Unable to retrieve user");
+        }
+      } catch (e) {
+        throw Exception("Error fetching user by ID: $e");
+      }
+    }
     Future<dynamic> checkEmail(String email) async {
       try {
         final users = await getUsers();
@@ -77,5 +109,6 @@
         throw "Error checking email: $e";
       }
     }
+
   }
 

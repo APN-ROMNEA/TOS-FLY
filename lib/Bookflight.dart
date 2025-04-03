@@ -39,7 +39,6 @@ class _BookflightState extends State<Bookflight> {
   ];
 
 
-  // List of available airplane classes
   final List<String> airplaneClasses = [
     'Economy Class, 1 Adult, 0 Child, 0 Infant',
     'Business Class, 1 Adult, 0 Child, 0 Infant',
@@ -130,11 +129,12 @@ class _BookflightState extends State<Bookflight> {
               padding: EdgeInsets.only(top: 0.0),
               child: Center(
                 child: Text(
-                  'TOS-FLY',
+                  'តោះហោះ',
                   style: TextStyle(
                     color: Colors.black87,
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'Moulpali',
                   ),
                 ),
               ),
@@ -169,7 +169,7 @@ class _BookflightState extends State<Bookflight> {
                     width: double.infinity,
                     color: Colors.white,
                     child: Image.network(
-                      'https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                      'https://plus.unsplash.com/premium_photo-1682310071124-33632135b2ee?q=80&w=2112&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return const Center(
@@ -338,7 +338,6 @@ class _BookflightState extends State<Bookflight> {
                 ),
                 const SizedBox(height: 10),
 
-                // Passenger Class Dropdown
                 Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
@@ -348,7 +347,6 @@ class _BookflightState extends State<Bookflight> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Text to display the selected class
                       Expanded(
                         child: Text(
                           selectedClass,
@@ -358,8 +356,7 @@ class _BookflightState extends State<Bookflight> {
                       ),
                       const SizedBox(
                           width:
-                          10), // Add spacing between text and dropdown icon
-                      // DropdownButton for selecting the class
+                          10),
                       DropdownButton<String>(
                         value: selectedClass,
                         icon: const Icon(Icons.arrow_drop_down,
@@ -463,11 +460,11 @@ class BookingFoundScreen extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: Text('Flight Booking'),
+        title: const Text('តោះហោះ', style: TextStyle(fontSize: 20, fontFamily: 'Moulpali', fontWeight: FontWeight.bold) ),
         centerTitle: true,
       ),
       body: Container(
-        color: Colors.blue[900], // Dark blue background
+        color: Colors.blue[900],
         child: Column(
           children: [
             SizedBox(height: 20),
